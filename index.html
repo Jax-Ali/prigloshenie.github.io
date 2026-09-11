@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Жастар тойы | Сағи &amp; Нұрай</title>
+  <meta name="description" content="Сағи мен Нұрайдың жастар тойына шақыру">
+  <meta property="og:title" content="Жастар тойы | Сағи &amp; Нұрай">
+  <meta property="og:description" content="Салтанатты ақ дастарханымыздың қадірлі қонағы болуға шақырамыз">
+  <meta property="og:image" content="images/page_builder_comp_1779537294802_48e197e7f3dd45c8822bda1d29e263f2.webp">
+  <link rel="icon" type="image/png" href="images/favicon-96x96.png" sizes="96x96">
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+
+  <!-- Top Notification Toast -->
+  <div class="top-toast" id="top-toast">
+    <span>💌 Шақыруға жауап беруді ұмытпаңыз 🙏</span>
+    <button class="toast-action-btn" onclick="scrollToRsvp()">Жауап беру →</button>
+    <button class="toast-close-btn" onclick="closeToast()">✕</button>
+  </div>
+
+  <!-- Audio Element -->
+  <audio id="wedding-audio" loop preload="auto">
+    <source src="music.mp3" type="audio/mp3">
+  </audio>
+
+  <!-- Floating Audio Button -->
+  <div class="audio-fab" id="audio-toggle-btn" onclick="toggleAudio()">
+    <div class="audio-icon-wrap">
+      <svg class="play-icon-svg" viewBox="0 0 24 24">
+        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+      </svg>
+      <div class="equalizer">
+        <div class="equalizer-bar"></div>
+        <div class="equalizer-bar"></div>
+        <div class="equalizer-bar"></div>
+      </div>
+    </div>
+    <span id="audio-btn-label">Әуен қосу</span>
+  </div>
+
+  <!-- Success Notification Toast -->
+  <div class="success-alert" id="success-alert">
+    <span>✅</span>
+    <span id="success-alert-text">Жауабыңыз қабылданды! Рақмет! 🙏</span>
+  </div>
+
+  <!-- Modal: RSVP Name -->
+  <div class="modal-backdrop" id="rsvp-modal" onclick="closeModalOnBackdrop(event, 'rsvp-modal')">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title">Есіміңізді жазыңыз:</h3>
+        <button class="modal-close" onclick="closeModal('rsvp-modal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <form class="wish-form-group" onsubmit="handleRsvpModalSubmit(event)">
+          <input type="text" id="rsvp-modal-name-input" class="wish-input-field" placeholder="Есіміңізді енгізіңіз" required />
+          <button type="submit" class="wish-modal-submit">ЖІБЕРУ</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-wrapper">
+    <div class="phone-container">
+      <div class="phone-notch"></div>
+      <div class="canvas-block" id="canvas-block">
+
+        <!-- Top Navy Background Shape -->
+        <div class="comp" style="left:50%; top:8.22%; z-index:1; width:500px; max-width:100%; height:764px;">
+          <div class="top-navy-bg"></div>
+        </div>
+
+        <!-- Header Texts -->
+        <div class="comp anim-init anim-slideInUp" style="left:50%; top:1.86%; z-index:163; width:350px; max-width:100%; height:auto;">
+          <div style="font-size:32px; font-family:'KZ_RomulC', Arial, sans-serif; color:#ffffff; text-align:center; font-weight:normal; letter-spacing:2px; text-transform:uppercase;">
+            ЖАСТАР ТОЙЫНА
+          </div>
+        </div>
+        <div class="comp anim-init anim-fadeIn" style="left:50%; top:2.79%; z-index:164; width:300px; max-width:100%; height:auto;">
+          <div style="font-size:48px; font-family:'BickhamScriptPro3-Regular', '_AsylbekM02Shelley', cursive, serif; color:#ffffff; text-align:center; font-weight:normal;">
+            шақыру
+          </div>
+        </div>
+
+        <!-- Envelope Image with Hands & Wax Seal -->
+        <div class="comp " style="left:50%; top:7.35%; z-index:203; width:433px; max-width:100%; height:403px;">
+          <img src="images/page_builder_comp_1779537294802_48e197e7f3dd45c8822bda1d29e263f2.webp" alt="Шақыру хаты" loading="lazy" />
+        </div>
+
+        <!-- Names -->
+        <div class="comp anim-init anim-fadeIn" style="left:50%; top:12.97%; z-index:204; width:300px; max-width:100%; height:auto;">
+          <div style="font-size:56px; font-family:'BickhamScriptPro3-Regular', '_AsylbekM02Shelley', cursive, serif; color:#ffffff; text-align:center; font-weight:normal;">
+            Сағи
+          </div>
+        </div>
+        <div class="comp anim-init anim-fadeIn" style="left:50%; top:13.77%; z-index:197; width:165px; max-width:100%; height:auto;">
+          <div style="font-size:42px; font-family:'BickhamScriptPro3-Regular', '_AsylbekM02Shelley', cursive, serif; color:#ffffff; text-align:center; font-weight:normal;">
+            &amp;
+          </div>
+        </div>
+        <div class="comp anim-init anim-fadeIn" style="left:50%; top:14.71%; z-index:196; width:300px; max-width:100%; height:auto;">
+          <div style="font-size:56px; font-family:'BickhamScriptPro3-Regular', '_AsylbekM02Shelley', cursive, serif; color:#ffffff; text-align:center; font-weight:normal;">
+            Нұрай
+          </div>
+        </div>
+
+        <!-- Marquee Ribbon -->
+        <div class="comp " style="left:50%; top:16.74%; z-index:199; width:497px; max-width:100%; height:37px;">
+          <div class="marquee-ribbon">
+            <div class="marquee-track">
+              <span>• Wedding day • Сағи &amp; Нұрай • Жастар тойы • Wedding day • Сағи &amp; Нұрай • Жастар тойы •</span>
+              <span>• Wedding day • Сағи &amp; Нұрай • Жастар тойы • Wedding day • Сағи &amp; Нұрай • Жастар тойы •</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card Frame Image -->
+        <div class="comp " style="left:50%; top:26.76%; z-index:168; width:390px; max-width:95%; height:733px;">
+          <img src="images/page_builder_comp_1779470247945_a2313f557e6b4a57adaf1bd11f39bbf6.webp" alt="Card frame" loading="lazy" />
+        </div>
+
+        <!-- Card Content -->
+        <div class="comp anim-init anim-slideInDown" style="left:50%; top:22.6%; z-index:169; width:260px; max-width:80%; height:auto;">
+          <div style="font-size:30px; font-family:'BickhamScriptPro3-Regular', '_AsylbekM02Shelley', cursive, serif; color:#ffffff; text-align:center; font-weight:normal;">
+            Құрметті қонақтар!
+          </div>
+        </div>
+        <div class="comp anim-init anim-slideInUp" style="left:50%; top:28.0%; z-index:170; width:260px; max-width:80%; height:auto;">
+          <div style="font-size:12px; font-family:'KZ_RomulC', Arial, sans-serif; color:#ffffff; text-align:center; font-weight:normal; line-height:1.55; letter-spacing:0.2px;">
+            ҚҰРМЕТТІ АҒАЙЫН-ТУЫС, БАУЫРЛАР, ҚҰДА-ЖЕКЖАТ, НАҒАШЫ-ЖИЕН, БӨЛЕЛЕР, ҚҰРБЫ-ҚҰРДАС, АПА-ЖЕЗДЕЛЕР, ӘРІПТЕСТЕР, КӨРШІЛЕР!<br><br>
+            Сіз(дер)ді <strong>Сағи</strong> мен <strong>Нұрайдың</strong> жастар тойына арналған салтанатты ақ дастарханымыздың қадірлі қонағы болуға шақырамыз.
+          </div>
+        </div>
+
+        <!-- Calendar Section -->
+        <div class="comp anim-init anim-slideInDown" style="left:50%; top:35.66%; z-index:171; width:300px; max-width:100%; height:auto;">
+          <div style="font-size:42px; font-family:'BickhamScriptPro3-Regular', '_AsylbekM02Shelley', cursive, serif; color:#031f45; text-align:center; font-weight:normal;">
+            Той салтанаты:
+          </div>
+        </div>
+        <div class="comp anim-init anim-slideInUp" style="left:50%; top:41.92%; z-index:172; width:300px; max-width:100%; height:420px;">
+          <div class="cal-wrapper">
+            <div class="cal-title">ҚАРАША 2026</div>
+            <div class="cal-weekdays">
+              <div>ДС</div><div>СС</div><div>СР</div><div>БС</div><div>ЖМ</div><div>СБ</div><div>ЖС</div>
+            </div>
+            <div class="cal-days">
+              <div class="cal-day-cell"></div>
+              <div class="cal-day-cell"></div>
+              <div class="cal-day-cell"></div>
+              <div class="cal-day-cell"></div>
+              <div class="cal-day-cell"></div>
+              <div class="cal-day-cell"></div>
+              <div class="cal-day-cell event-day">
+                <svg class="heart-marker-svg" viewBox="0 0 24 24">
+                  <path fill="#031f45" stroke="#031f45" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+                <span>1</span>
+              </div>
+              <div class="cal-day-cell">2</div>
+              <div class="cal-day-cell">3</div>
+              <div class="cal-day-cell">4</div>
+              <div class="cal-day-cell">5</div>
+              <div class="cal-day-cell">6</div>
+              <div class="cal-day-cell">7</div>
+              <div class="cal-day-cell">8</div>
+              <div class="cal-day-cell">9</div>
+              <div class="cal-day-cell">10</div>
+              <div class="cal-day-cell">11</div>
+              <div class="cal-day-cell">12</div>
+              <div class="cal-day-cell">13</div>
+              <div class="cal-day-cell">14</div>
+              <div class="cal-day-cell">15</div>
+              <div class="cal-day-cell">16</div>
+              <div class="cal-day-cell">17</div>
+              <div class="cal-day-cell">18</div>
+              <div class="cal-day-cell">19</div>
+              <div class="cal-day-cell">20</div>
+              <div class="cal-day-cell">21</div>
+              <div class="cal-day-cell">22</div>
+              <div class="cal-day-cell">23</div>
+              <div class="cal-day-cell">24</div>
+              <div class="cal-day-cell">25</div>
+              <div class="cal-day-cell">26</div>
+              <div class="cal-day-cell">27</div>
+              <div class="cal-day-cell">28</div>
+              <div class="cal-day-cell">29</div>
+              <div class="cal-day-cell">30</div>
+              <div class="cal-day-cell"></div>
+              <div class="cal-day-cell"></div>
+              <div class="cal-day-cell"></div>
+              <div class="cal-day-cell"></div>
+              <div class="cal-day-cell"></div>
+              <div class="cal-day-cell"></div>
+            </div>
+            <div class="cal-time-badge">БАСТАЛУЫ 10:00</div>
+          </div>
+        </div>
+
+        <!-- Door Illustration -->
+        <div class="comp " style="left:50%; top:50.65%; z-index:177; width:180px; max-width:100%; height:271px;">
+          <img src="images/page_builder_comp_1779470793373_9210ee832f8f4bc7806f9c00c8305c09.webp" alt="Есік суреті" loading="lazy" />
+        </div>
+
+        <!-- Hosts Section -->
+        <div class="comp " style="left:50%; top:57.13%; z-index:170; width:430px; max-width:100%; height:186px;">
+          <div class="hosts-navy-bg"></div>
+        </div>
+        <div class="comp anim-init anim-slideInDown" style="left:50%; top:56.11%; z-index:206; width:326px; max-width:100%; height:auto;">
+          <div style="font-size:38px; font-family:'BickhamScriptPro3-Regular', '_AsylbekM02Shelley', cursive, serif; color:#ffffff; text-align:center; font-weight:normal;">
+            Той иелері:
+          </div>
+        </div>
+        <div class="comp anim-init anim-slideInUp" style="left:50%; top:57.78%; z-index:207; width:326px; max-width:100%; height:auto;">
+          <div style="font-size:20px; font-family:'KZ_RomulC', Arial, sans-serif; color:#ffffff; text-align:center; font-weight:normal; letter-spacing:1px;">
+            Серік - Күланда
+          </div>
+        </div>
+
+        <!-- Address Section -->
+        <div class="comp anim-init anim-slideInDown" style="left:50%; top:60.65%; z-index:173; width:300px; max-width:100%; height:auto;">
+          <div style="font-size:42px; font-family:'BickhamScriptPro3-Regular', '_AsylbekM02Shelley', cursive, serif; color:#031f45; text-align:center; font-weight:normal;">
+            Мекен-жайы:
+          </div>
+        </div>
+        <div class="comp anim-init anim-slideInLeft" style="left:50%; top:63.60%; z-index:174; width:360px; max-width:100%; height:auto;">
+          <div style="font-size:18px; font-family:'KZ_RomulC', Arial, sans-serif; color:#031f45; text-align:center; font-weight:normal; line-height:1.4;">
+            Қызылорда қаласы
+          </div>
+        </div>
+        <div class="comp anim-init anim-slideInRight" style="left:50%; top:65.75%; z-index:175; width:360px; max-width:100%; height:auto;">
+          <div style="font-size:18px; font-family:'KZ_RomulC', Arial, sans-serif; color:#031f45; text-align:center; font-weight:normal; line-height:1.4;">
+            Астана көшесі, 83<br>«Аег» мейрамханасы
+          </div>
+        </div>
+        <div class="comp anim-init anim-slideInUp" style="left:50%; top:68.22%; z-index:176; width:220px; max-width:100%; height:46px;">
+          <a href="https://yandex.kz/maps/?text=Қызылорда+қаласы+Астана+көшесі+83+Аег+рестораны" target="_blank" rel="noopener noreferrer" class="map-action-btn">
+            Картаны ашу
+          </a>
+        </div>
+
+        <!-- Envelope Illustration with Card -->
+        <div class="comp " style="left:50%; top:75.11%; z-index:180; width:440px; max-width:100%; height:460px;">
+          <img src="images/page_builder_comp_1779471094441_70381d80a35c41108b44b51985b03876.webp" alt="Хат қалта" loading="lazy" />
+        </div>
+
+        <!-- Event Badge Card -->
+        <div class="comp anim-init anim-zoomIn" style="left:50%; top:74.65%; z-index:181; width:320px; max-width:100%; height:120px;">
+          <div class="timer-card-content">
+            <div class="timer-badge-title">ОҚИҒА БАСТАЛДЫ!</div>
+            <div class="timer-ribbon-decor"></div>
+          </div>
+        </div>
+
+        <!-- RSVP Section -->
+        <div class="comp anim-init anim-slideInDown" style="left:50%; top:83.47%; z-index:182; width:326px; max-width:100%; height:auto;">
+          <div style="font-size:34px; font-family:'BickhamScriptPro3-Regular', '_AsylbekM02Shelley', cursive, serif; color:#031f45; text-align:center; font-weight:normal; line-height:1.3;">
+            Тойға келуіңізді растауыңызды сұраймыз
+          </div>
+        </div>
+        <div class="comp " id="rsvp-section" style="left:50%; top:90.10%; z-index:183; width:350px; max-width:100%; height:auto;">
+          <div class="rsvp-form-container">
+            <div class="rsvp-option selected" onclick="selectRsvpOption(this, 'yes')">
+              <div class="rsvp-radio-circle"><div class="rsvp-radio-dot"></div></div>
+              <span class="rsvp-option-text">Иә, барамын!</span>
+            </div>
+            <div class="rsvp-option" onclick="selectRsvpOption(this, 'spouse')">
+              <div class="rsvp-radio-circle"><div class="rsvp-radio-dot"></div></div>
+              <span class="rsvp-option-text">Жұбайыммен бірге барамын</span>
+            </div>
+            <div class="rsvp-option" onclick="selectRsvpOption(this, 'no')">
+              <div class="rsvp-radio-circle"><div class="rsvp-radio-dot"></div></div>
+              <span class="rsvp-option-text">Өкінішке орай, келе алмаймын</span>
+            </div>
+            <button type="button" class="rsvp-submit-button" onclick="openRsvpNameModal()">ЖАУАП БЕРУ</button>
+          </div>
+        </div>
+
+        <!-- Rings Illustration at the end -->
+        <div class="comp anim-init anim-slideInUp" style="left:50%; top:96.16%; z-index:185; width:268px; max-width:100%; height:181px;">
+          <img src="images/page_builder_comp_1779471352277_e62de425eb894a57bb644429f4ec1051.webp" alt="Неке жүзіктері" loading="lazy" />
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
